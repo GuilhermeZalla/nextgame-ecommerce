@@ -4,7 +4,7 @@ A Ecommerce website built with MERN stack. MongoDB used for the backend with Nod
 
 React Router used for navigation. 
 
-## Home Page
+## Home Page and Browser Catalog
 
 ![App Screenshot](https://imgur.com/QGVOk0E.png)
 
