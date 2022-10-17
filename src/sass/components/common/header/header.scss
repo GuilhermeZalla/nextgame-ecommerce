@@ -1,0 +1,332 @@
+@charset "UTF-8";
+
+@mixin layoutFlex($display, $justify, $align, $direction, $wrap, $gap) {
+    display: $display;
+    justify-content: $justify;
+    align-items: $align;
+    flex-direction: $direction;
+    flex-wrap: $wrap;
+    gap: $gap;
+}
+
+@mixin imageFit($max, $min, $maxh, $minh, $obj, $display) {
+    max-width: $max;
+    min-width: $min;
+    max-height: $maxh;
+    min-height: $minh;
+    object-fit: $obj;
+    display: $display;
+}
+
+*,
+::after,
+::before {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: $fnt-general;
+    font-size: 16px;
+    color: $clr-neutral;
+    scroll-behavior: smooth;
+    user-select: none;
+    box-shadow: inset 0 0 20px 10px rgba(0, 0, 0, 0.486);
+    height: 100vh;
+}
+
+a {
+    text-decoration: none;
+}
+
+button {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    cursor: pointer;
+    color: $clr-neutral;
+    font-family: $fnt-general;
+    padding: 0;
+}
+
+input {
+    background-color: $clr-brand;
+    font-family: $fnt-general;
+    font-weight: bold;
+    color: $clr-browser-bg;
+    border: none;
+    border-radius: 15px;
+    outline: none;
+    width: 100%;
+    padding: 10px 0 10px 12px;
+    margin-top: 15px;
+
+    &::placeholder {
+        color: inherit;
+    }
+}
+
+#root {
+    padding: 15px 30px;
+}
+
+.wishlisted {
+    color: $clr-heart;
+}
+
+.header {
+    width: 100%;
+    margin-bottom: 15%;
+
+    .header__navbar {
+        @include layoutFlex(flex, space-between, center, row, none, 0);
+    }
+
+    .header__list {
+        @include layoutFlex(inherit, inherit, inherit, inherit, inherit, 40px);
+
+        .header__item {
+            @include layoutFlex(inherit, flex-start, center, row, none, 10px);
+            font-weight: bold;
+            font-size: .98rem;
+            position: relative;
+
+            & svg {
+                font-size: 1.2rem;
+            }
+
+            & button {
+                @include layoutFlex(inherit, flex-start, center, inherit, inherit, inherit);
+                font-weight: inherit;
+                font-size: inherit;
+
+                &[name='cart'] {
+                    position: relative;
+                    z-index: 9;
+
+                    &>svg {
+                        color: $clr-brand;
+                    }
+                }
+                &[name='browse']{
+                    &:hover{
+                        color: $clr-brand;
+                    }
+                }
+            }
+
+            &>a {
+                @include layoutFlex(flex, flex-start, center, row, none, 10px);
+                color: $clr-neutral;
+            }
+
+            .dropdown-menu {
+                position: absolute;
+                top: 15px;
+                right: -5px;
+                z-index: 25;
+                height: 20px;
+                width: 110px;
+                padding-top: 10px;
+                display: none;
+
+                .dropdown__list {
+                    background-color: hwb(0deg 100% 0% / 28%);
+                    backdrop-filter: blur(100px);
+                    padding: 10px;
+                    border-radius: 5px;
+                }
+
+                button {
+                    @include layoutFlex(flex, flex-start, center, row, none, 5px);
+                    font-size: .85rem;
+                    color: $clr-neutral;
+
+                    &>svg {
+                        font-size: 1.1rem;
+                    }
+
+                    &:hover {
+                        color: $clr-brand;
+                    }
+                }
+            }
+
+            &.dropdown {
+                &:hover {
+                    &>.dropdown-menu {
+                        display: block;
+                    }
+                }
+            }
+        }
+    }
+
+    .modal {
+        @include layoutFlex(none, flex-end, flex-start, none, none, 0);
+        background-color: #111111cc;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 10;
+
+        &>span {
+            @include layoutFlex(flex, flex-start, center, row, none, 8px);
+            position: absolute;
+            top: 15px;
+            left: 10px;
+            cursor: pointer;
+
+            &:hover {
+                color: $clr-brand;
+
+                & svg {
+                    color: $clr-brand;
+                }
+            }
+
+            &>button {
+                position: relative;
+                top: 2px;
+                left: 5px;
+                transition: all 600ms ease-in-out;
+                font-size: 1rem;
+
+                &>svg {
+                    font-size: 1.4rem;
+                }
+            }
+        }
+
+        .modal__container {
+            @include layoutFlex(flex, flex-start, none, column, none, 10px);
+            box-shadow: -7px 0px 9px 0 #00000061;
+            transition: all 480ms ease-in-out;
+            background-color: $clr-modal-bg;
+            padding: 20px;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            z-index: 11;
+            width: 0;
+            opacity: 0;
+
+        }
+
+        .modal__header {
+            @include layoutFlex(inherit, space-between, center, row, none, 0);
+            font-size: 1.6rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            transition: all 300ms ease-in-out;
+            opacity: 0;
+
+            &>button {
+                font-size: .90rem;
+            }
+        }
+
+        .modal__list {
+            @include layoutFlex(flex, flex-start, none, column, none, 10px);
+            max-height: 1000px;
+            overflow: scroll;
+            transition: all 550ms ease-in-out;
+            padding-top: 200px;
+            opacity: 0;
+
+            &::-webkit-scrollbar {
+                display: none;
+            }
+
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+
+            .modal__item {
+                @include layoutFlex(inherit, space-between, center, row, none, 0);
+                background-color: $clr-dark-neutral;
+                padding: 12px;
+                border-radius: 8px;
+                width: 100%;
+                font-size: .90rem;
+
+                &>span {
+                    @include layoutFlex(flex, space-between, center, row, none, 10px);
+                    font-size: .75rem;
+                    opacity: .5;
+                    width: 70px;
+
+                    &>button {
+                        @include layoutFlex(inherit, center, center, row, none, 0);
+                        opacity: 1;
+
+                        &>svg {
+                            background-color: $clr-modal-bg;
+                            font-size: 1.1rem;
+                            border-radius: 50px;
+                        }
+                    }
+                }
+
+                &:first-child {
+                    margin-top: 5px;
+                }
+
+                &:last-child {
+                    margin-bottom: 40px;
+                }
+            }
+        }
+
+        .modal__footer {
+            background-color: $clr-modal-bg;
+            position: absolute;
+            bottom: 0;
+            left: 20px;
+            right: 20px;
+            padding: 15px 0;
+            transition: all 300ms ease-in-out;
+            opacity: 0;
+
+            &>span {
+                @include layoutFlex(flex, space-between, center, row, none, 0);
+                font-weight: bold;
+                font-size: .95rem;
+
+                &>h3 {
+                    opacity: .6;
+                }
+
+                &>button {
+                    @include layoutFlex(inherit, none, center, row, none, 5px);
+                    font-size: 1.2rem;
+                    font-weight: inherit;
+                }
+            }
+        }
+    }
+}
+
+.main__loader {
+    @include layoutFlex(flex, center, center, column, none, 15px);
+
+    .loader {
+        border: 5px solid rgba(230, 221, 221, 0.849);
+        border-top: 5px solid $clr-brand;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+}
