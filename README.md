@@ -38,32 +38,40 @@ React Router used for navigation.
 
 ## Product Page
 
-![App Screenshot](https://i.imgur.com/UAVW6h8.png)
+![App Screenshot](https://i.imgur.com/JY3eEyk.png)
+![App Screenshot](https://i.imgur.com/7enVN6f.png)
 
 > Clicking on add to cart will add the current item/product to the shopping cart.
 
-**Shopping Cart:**
+**Shopping Cart (Mongoose Schema):**
 
 ```
 {
-    id:{
-       type: Number,
-       required: true,
-    },
-      name: {
+     id:{
+        type: Number,
+        required: true,
+        unique: true
+     },
+     name: {
         type: String,
         required: true,
         unique: false
-    },
-      price: {
+     },
+     quant: {
+        type: Number,
+        required: false,
+        unique: false,
+        default: 1
+     },
+     price: {
         type: Number,
         required: true,
         unique: false
-    },
-      user: {
+     },
+     user:{
         type: mongoose.SchemaTypes.ObjectId,
         ref: 'Account'
-   }
+     }
 }
 ```
 
