@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* Colors */
 
 @import "./variables/colors/colors.scss";
@@ -15,3 +16,21 @@
 @import "./components/about/about.scss";
 @import "./components/portfolio/portfolio.scss";
 @import "./components/contact/contact.scss";
+=======
+/* Import Colors */
+
+@import './variables/colors/colors.scss';
+
+/* Import Fonts */
+
+@import './variables/fonts/fonts.scss';
+@import 'https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;700&display=swap';
+
+/* Import Components */
+
+@import './components/common/header/header.scss';
+@import './components/home/home.scss';
+@import './components/browser/browser.scss';
+@import './components/productOverview/productOverview.scss';
+@import './components/validation/validation.scss';
+>>>>>>> 50ff871da34c8c9698caf8060128bf277db8fdfa
