@@ -16,7 +16,7 @@ async function verifyAccount(email, password) {
     return result;
 };
 
-async function defineLogin(email){
+async function defineLogin(email) {
     let response = await fetch(`http://localhost:3001/accounts/${email}/${true}`, {
         method: "PATCH",
         mode: "cors",
@@ -41,19 +41,19 @@ export const LoginForm = ({ handleFormType }) => {
     const setLogin = email => defineLogin(email).then(res => navigator('/')).catch(err => console.error(`New Error: ${err}`));
 
     const handleLogin = () => {
-         verifyAccount(userEmail, userPassword).then(res => {
-             if(res){
+        verifyAccount(userEmail, userPassword).then(res => {
+            if (res) {
                 warning.current.style.display = 'none';
                 setLogin(userEmail);
                 localStorage.setItem('user', userEmail);
-             }else{
+            } else {
                 warning.current.style.display = 'block';
-             }
-         }).catch(err => console.error(`New Error: ${err}`));
+            }
+        }).catch(err => console.error(`New Error: ${err}`));
     };
 
     return (
-        <form>
+        <form className="form-login">
             <fieldset>
                 <legend>Login</legend>
                 <p>
@@ -65,11 +65,11 @@ export const LoginForm = ({ handleFormType }) => {
                 <p className="personal-account">Or Login in with your email</p>
                 <p>
                     <label htmlFor="email">Email*</label>
-                    <input type="email" name="email" id="email" placeholder="mail@website.com" required ref={email} onBlur={e => setEmail(e.target.value)}/>
+                    <input type="email" name="email" id="email" placeholder="mail@website.com" required ref={email} onBlur={e => setEmail(e.target.value)} />
                 </p>
                 <p>
                     <label htmlFor="password">Password*</label>
-                    <input type="password" name="password" id="password" placeholder="Min. 8 character" required ref={password} onBlur={e => setPassword(e.target.value)}/>
+                    <input type="password" name="password" id="password" placeholder="Min. 8 character" required ref={password} onBlur={e => setPassword(e.target.value)} />
                 </p>
                 <p>
                     <button type="button" name='login' onClick={handleLogin}>Login</button>

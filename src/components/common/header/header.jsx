@@ -130,36 +130,38 @@ export const Header = ({ openBrowser }) => {
 
     const handleClearCart = () => {
         clearCart(localStorage.getItem('user')).then(res => console.log("Cart is now empty.")).catch(err => console.log(`New Error: ${err}`));
-        setController(1);
+        setController(controller + 1);
         setTotal(0);
     };
 
     const handleLogout = () => {
         defineLogin(localStorage.getItem('user')).then(res => console.log("User logout.")).catch(err => console.error(`New Error: ${err}`));
         localStorage.removeItem('user');
-        setController(1);
+        setController(controller + 1);
     };
+
+    const handleController = e => setController(controller + e);
 
     return (
         <header className="header">
             <nav className="header__navbar">
                 <ul className="header__list">
                     <li className="header__item"><IoGameControllerOutline /> Next Game</li>
-                    <li className="header__item"><button type="button" name='browse' onClick={openBrowser}><MdOutlineShoppingCart /> Browse Store</button></li>
+                    <li className="header__item"><button type="button" name='browse' onClick={openBrowser} title="Open store catalog"><MdOutlineShoppingCart /> Browse Store</button></li>
                 </ul>
                 <ul className="header__list">
                     {
-                        login === false ? <li className="header__item"><Link to={'/validation'}><BiJoystickAlt /> click to login</Link></li>
+                        login === false ? <li className="header__item"><Link to={'/validation'} title="Login with an account"><BiJoystickAlt /> click to login</Link></li>
                             :
                             <li className="header__item dropdown"><BiJoystickAlt /> {user}
                                 <div className="dropdown-menu">
                                     <ul className="dropdown__list">
-                                        <li className="dropdown__item"><button type="button" onClick={handleLogout}><MdOutlineLogout /> Logout</button></li>
+                                        <li className="dropdown__item"><button type="button" onClick={handleLogout} title="Logout from your account"><MdOutlineLogout /> Logout</button></li>
                                     </ul>
                                 </div>
                             </li>
                     }
-                    <li className="header__item"><button type="button" name='cart' onClick={openCart}><IoBagSharp /> Cart: {cart.length}</button></li>
+                    <li className="header__item"><button type="button" name='cart' onClick={openCart} title="Your shopping cart"><IoBagSharp /> Cart: {cart.length}</button></li>
                 </ul>
                 <div className="modal" ref={cartModal}>
                     <span onClick={closeCart} ><button type="button" ref={close}><MdOutlineKeyboardBackspace /></button>exit</span>
@@ -167,7 +169,7 @@ export const Header = ({ openBrowser }) => {
                         <header className="modal__header" ref={cartHeader}><h2>games</h2><button type="button" onClick={handleClearCart}>Clear</button></header>
                         <ul className="modal__list" ref={list}>
                             {
-                                cart.map((item, index) => <CartItem key={index} name={item.name} price={item.price} />)
+                                cart.map((item, index) => <CartItem key={index} name={item.name} price={item.price} handleController={handleController} />)
                             }
                         </ul>
                         <footer className="modal__footer" ref={cartFooter}>

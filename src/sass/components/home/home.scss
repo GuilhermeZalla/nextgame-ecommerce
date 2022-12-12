@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 .home {
-    @include layoutFlex(flex, space-between, center, row, none, 0);
+    @include layoutFlex(flex, space-between, center, row, wrap, 0);
     margin-top: 15%;
     &>figure {
         position: fixed;

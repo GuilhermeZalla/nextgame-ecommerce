@@ -45,7 +45,7 @@ export const RegisterForm = ({ handleFormType }) => {
     };
 
     return (
-        <form method="POST" action="http://localhost:3001/accounts">
+        <form method="POST" action="http://localhost:3001/accounts" className="form-register">
             <fieldset>
                 <legend>Sign Up</legend>
                 <p>Create an account to use for your purchases</p>

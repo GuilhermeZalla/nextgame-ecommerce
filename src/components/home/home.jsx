@@ -1,5 +1,3 @@
-import { useEffect, useRef, useState } from "react";
-import { Header } from "../common/header/header";
 import { MdOutlineKeyboardBackspace, MdOutlineReviews, MdSportsFootball, MdOutlineTableRows, MdLogin } from "react-icons/md";
 import { CgGift, CgBrowser } from "react-icons/cg";
 import { FaStar, FaMountain, FaFlagCheckered, FaLinkedinIn } from "react-icons/fa";
@@ -10,7 +8,9 @@ import { BsGrid3X2, BsGithub, BsTelegram } from "react-icons/bs";
 import { RiOpenSourceLine } from "react-icons/ri";
 import { AiFillHome } from "react-icons/ai";
 import { TbSwords } from "react-icons/tb";
+import { Header } from "../common/header/header";
 import { Product } from "./product/product";
+import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 
 async function getData() {
@@ -102,9 +102,9 @@ export const Home = () => {
 
     return (
         <>
-            <Header openBrowser={openBrowser}/>
+            <Header openBrowser={openBrowser} />
             <main className="home">
-                <figure><img src={data.length === 0 ? null : data[18].background_image} alt={data.name} /></figure>
+                <figure><img src={data.length === 0 ? null : data[17].background_image} alt={data.name} /></figure>
                 <div className="home__container">
                     <article className="home__article">
                         <h1 className="home__title">Next Game</h1>
@@ -193,7 +193,7 @@ export const Home = () => {
                                 :
                                 <div className="browser__catalog" ref={catalog}>
                                     {
-                                        data?.map(game => game.genres.map(genre => genre.slug === filter ? <Product key={game.id} id={game.id} name={game.name} image={game.background_image}/> : null))
+                                        data?.map(game => game.genres.map(genre => genre.slug === filter ? <Product key={game.id} id={game.id} name={game.name} image={game.background_image} /> : null))
                                     }
                                 </div>
                         }

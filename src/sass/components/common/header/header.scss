@@ -330,3 +330,15 @@ input {
         }
     }
 }
+
+@media screen and (max-width: 599px){
+    input {
+        padding: 8px 0 8px 14px;
+        margin-top: 5px;
+        font-size: .80rem;
+
+        &::placeholder {
+            color: inherit;
+        }
+    }
+}

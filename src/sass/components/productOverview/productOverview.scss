@@ -1,10 +1,12 @@
 @charset "UTF-8";
 
-.main__product{
+.main__product {
     @include layoutFlex(flex, flex-start, center, column, none, 20px);
+    margin-top: 25px;
 }
 
-.main__product, .main__loader {
+.main__product,
+.main__loader {
     background-color: $clr-product-overview-bg;
     position: absolute;
     top: 0;
@@ -17,6 +19,7 @@
     &>span {
         @include layoutFlex(inherit, space-between, center, row, none, 0);
         width: 100%;
+
         &>a {
             @include layoutFlex(flex, flex-start, center, row, none, 5px);
             color: $clr-neutral;
@@ -30,6 +33,18 @@
 
     .main__container {
         @include layoutFlex(flex, flex-start, flex-start, row, none, 25px);
+        margin-top: 20px;
+
+        &>img {
+            @include imageFit(100%, 100%, 100%, 100%, cover, block);
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: -1;
+            filter: brightness(10%);
+        }
 
         .main__slider {
             @include layoutFlex(flex, center, center, row, none, none);
@@ -37,7 +52,7 @@
             height: 500px;
             position: relative;
 
-            &>span{
+            &>span {
                 @include layoutFlex(flex, center, center, row, none, 15px);
                 background-color: $clr-modal-bg;
                 box-shadow: 0 0 12px 1px #07060670;
@@ -46,12 +61,14 @@
                 position: absolute;
                 bottom: 15px;
                 margin: auto;
-                &>button{
+
+                &>button {
                     background-color: #808080;
                     border-radius: 50%;
                     width: 9px;
                     padding: 6px;
-                    &:first-child{
+
+                    &:first-child {
                         background-color: $clr-brand;
                     }
                 }
@@ -95,11 +112,13 @@
                     overflow: scroll;
                     transition: all 400ms ease-in-out;
                     padding-bottom: 40px;
+
                     &::-webkit-scrollbar {
                         display: none;
-                      }
-                     -ms-overflow-style: none;
-                     scrollbar-width: none;
+                    }
+
+                    -ms-overflow-style: none;
+                    scrollbar-width: none;
                 }
 
                 .main__article-footer {
@@ -119,11 +138,13 @@
                         position: relative;
                         z-index: 21;
                         float: right;
-                        &>svg{
+
+                        &>svg {
                             font-size: 1.1rem;
                         }
                     }
-                    .less{
+
+                    .less {
                         display: none;
                     }
                 }
@@ -157,17 +178,63 @@
                             }
                         }
                     }
-                    button[name='add']{
+
+                    button[name='add'] {
                         font-size: .90rem;
                         font-weight: bold;
                         transition: all 180ms ease-in-out;
-                        &:hover{
+
+                        &:hover {
                             color: $clr-brand;
                             transform: scale(110%);
                         }
-                }
+                    }
                 }
             }
+        }
+    }
+}
+
+@media screen and (max-width: 600px){
+    .main__product {
+        .main__container {
+            margin: 30px 5px 0 5px;
+            .main__slider {
+                @include layoutFlex(flex, center, center, row, none, none);
+                height: 270px;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 600px) and (max-width: 991px){
+    .main__product {
+
+        .main__container {
+            .main__slider {
+                @include layoutFlex(flex, center, center, row, none, none);
+                height: 400px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 991px) {
+
+    .main__product,
+    .main__loader {
+        &>span {
+            margin-top: 50px;
+
+            &>h1 {
+                font-size: 2rem;
+            }
+        }
+
+        .main__container {
+            @include layoutFlex(flex, center, center, column, none, 25px);
+            margin: 30px 8% 0 8%;
+            padding-bottom: 40px;
         }
     }
 }

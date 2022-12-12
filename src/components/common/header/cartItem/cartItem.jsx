@@ -16,7 +16,7 @@ async function removeItem(email, name) {
 
 export const CartItem = (props) => {
 
-    const removeCartItem = () => removeItem(localStorage.getItem('user'), props.name).then(res => console.log("Item removed from cart.")).catch(err => console.error(`New Error: ${err}`));
+    const removeCartItem = () => removeItem(localStorage.getItem('user'), props.name).then(res => props.handleController(1)).catch(err => console.error(`New Error: ${err}`));
 
     return (
         <li className="modal__item">{props.name}<span>${props.price}<button type="button" onClick={removeCartItem}><IoIosClose /></button></span></li>

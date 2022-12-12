@@ -71,6 +71,8 @@ export const ProductOverview = () => {
     let more = useRef(null);
     let less = useRef(null);
 
+    console.log(data);
+
     useEffect(() => {
         getData(Number(id)).then(data => setData(data)).catch(err => console.error(err));
         getImages().then(images => {
@@ -97,8 +99,8 @@ export const ProductOverview = () => {
     const handleOption = e => {
         setOption(e.target.value);
         e.target.style.backgroundColor = '#20ffe1';
-        for(let i = 0; i < options.length; ++i){
-            if(options[i] !== e.target){
+        for (let i = 0; i < options.length; ++i) {
+            if (options[i] !== e.target) {
                 options[i].style.backgroundColor = '#808080';
             }
         }
@@ -137,6 +139,7 @@ export const ProductOverview = () => {
             <main className="main__product">
                 <span><Link to={`/${'home'}`}><FaArrowLeft /> Store</Link> <h1 className="main__title">{data?.name}</h1></span>
                 <div className="main__container">
+                    <img src={data?.background_image} alt={data?.name} />
                     <div className="main__slider">
                         <figure><img src={images[option]?.image} alt={data?.name} /></figure>
                         <span>
@@ -156,8 +159,8 @@ export const ProductOverview = () => {
                             </footer>
                         </article>
                         <div>
-                            <span>$59 &nbsp;&nbsp;<button type="button" onClick={addToWishlist}>{heart}</button></span>
-                            <button type="button" name='add' onClick={addToCart}>Add</button>
+                            <span>$59 &nbsp;&nbsp;<button type="button" onClick={addToWishlist} title="Add current product to wishlist">{heart}</button></span>
+                            <button type="button" name='add' onClick={addToCart} title="Add current product to cart">Add</button>
                         </div>
                     </div>
                 </div>
